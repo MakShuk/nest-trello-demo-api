@@ -10,7 +10,40 @@ datasource db {
 
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String?
+  id          Int       @id @default(autoincrement())
+  username    String    @unique
+  email       String    @unique
+  passwordHash String
+  createdAt   DateTime  @default(now())
+  columns     Column[]
+  comments    Comment[]
+}
+
+model Column {
+  id        Int      @id @default(autoincrement())
+  title     String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  cards     Card[]
+}
+
+model Card {
+  id        Int       @id @default(autoincrement())
+  title     String
+  description String?
+  createdAt DateTime  @default(now())
+  column    Column    @relation(fields: [columnId], references: [id])
+  columnId  Int
+  comments  Comment[]
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  content   String
+  createdAt DateTime  @default(now())
+  card      Card      @relation(fields: [cardId], references: [id])
+  cardId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
 }
