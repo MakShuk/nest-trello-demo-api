@@ -1,11 +1,18 @@
+###register
+POST http://localhost:3000/auth/register
+content-type: application/json
 
-### Hello World!
-GET http://localhost:3000/
-
-###
-POST http://localhost:3000/auth/login
-t-type: application/json
 {
-    "email": "sample",
-    "password": "sample"
+    "email": "exу32@5234s.com",
+    "password": "324423dfAfd_Svd!",
+    "username": "user"
+}
+
+###login
+POST http://localhost:3000/auth/login
+content-type: application/json
+
+{
+    "email": "exу32@5234s.com",
+    "password": "324423dfAfd_Svd!"
 }
