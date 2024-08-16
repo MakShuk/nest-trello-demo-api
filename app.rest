@@ -1,0 +1,11 @@
+
+### Hello World!
+GET http://localhost:3000/
+
+###
+POST http://localhost:3000/auth/login
+t-type: application/json
+{
+    "email": "sample",
+    "password": "sample"
+}

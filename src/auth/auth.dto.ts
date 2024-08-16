@@ -1,11 +1,10 @@
 export class RegisterDto {
   email: string;
   password: string;
-  displayName?: string;
+  username: string;
 }
 
 export class LoginDto {
   email: string;
   password: string;
-  displayName?: string;
 }
