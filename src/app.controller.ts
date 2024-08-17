@@ -1,14 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Public } from './decorators/custom.decorator';
+import { Request } from 'express';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Public()
+  // @Public()
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello(@Req() req: Request): string {
+    //const { id: userId } = req['user'];
+    const userAgent = req.headers['user-agent']; // Получаем заголовок "User-Agent"
+    return `User-Agent: ${userAgent}`;
   }
 }
