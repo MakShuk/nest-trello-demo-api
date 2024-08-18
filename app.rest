@@ -69,3 +69,58 @@ authorization: {{authToken}}
 ### Get Cards
 GET {{baseUrl}}/users/{{userId}}/columns/2/cards/
 authorization:  {{authToken}} 
+
+### Create Cards
+POST {{baseUrl}}/users/{{userId}}/columns/2/cards/
+authorization:  {{authToken}} 
+content-type: application/json
+
+{
+    "title": "title2",
+    "description": "title2-title2"
+}
+
+### Update card
+PATCH {{baseUrl}}/users/{{userId}}/columns/2/cards/3
+authorization: {{authToken}}
+content-type: application/json
+
+{
+    "description": "title-update-3"
+}
+
+### Delete card
+DELETE {{baseUrl}}/users/{{userId}}/columns/2/cards/5
+authorization: {{authToken}}
+
+### Get comments
+GET {{baseUrl}}/users/{{userId}}/columns/2/cards/1/comments
+authorization:  {{authToken}} 
+
+### Get comment
+GET {{baseUrl}}/users/{{userId}}/columns/2/cards/1/comments/2
+authorization:  {{authToken}} 
+
+### Create comment
+POST {{baseUrl}}/users/{{userId}}/columns/2/cards/1/comments
+authorization:  {{authToken}} 
+content-type: application/json
+
+{
+    "content": "comment-2"
+
+}
+
+### Update comment
+PATCH {{baseUrl}}/users/{{userId}}/columns/2/cards/1/comments/1
+authorization:  {{authToken}} 
+content-type: application/json
+
+{
+    "content": "comment-2"
+
+}
+
+### Delete comment
+DELETE {{baseUrl}}/users/{{userId}}/columns/2/cards/5/comments/1
+authorization: {{authToken}}

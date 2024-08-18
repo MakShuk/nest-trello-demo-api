@@ -1,26 +1,68 @@
-import { Controller, Get, Param, Post, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CardsService } from './cards.service';
+import { UserAuthGuard } from 'src/guards/user.guard';
+import { CreateCardDto, UpdateCardDto } from './cards.dto';
 
+@UsePipes(new ValidationPipe({ whitelist: true }))
 @Controller('users/:userId/columns/:columnId/cards')
+@UseGuards(UserAuthGuard)
 export class CardsController {
   constructor(private readonly cardsService: CardsService) {}
 
   @Post()
   createCard(
-    @Req() req: Request,
+    @Body() data: CreateCardDto,
     @Param('userId') userId: string,
     @Param('columnId') columnId: string,
   ) {
-    return `This action creates a card for user ${userId} in column ${columnId}`;
+    return this.cardsService.createCard(data, Number(columnId), Number(userId));
   }
 
   @Get()
   getAllCards(
-    @Req() req: Request,
     @Param('userId') userId: string,
     @Param('columnId') columnId: string,
   ) {
-    return `This action returns all cards for user ${userId} in column ${columnId}`;
+    return this.cardsService.getAllCards(Number(columnId), Number(userId));
+  }
+
+  @Patch(':cardId')
+  updateCard(
+    @Body() data: UpdateCardDto,
+    @Param('userId') userId: string,
+    @Param('columnId') columnId: string,
+    @Param('cardId') cardId: string,
+  ) {
+    return this.cardsService.updateCard(
+      Number(cardId),
+      Number(columnId),
+      Number(userId),
+      data,
+    );
+  }
+
+  @Delete(':cardId')
+  deleteCard(
+    @Param('userId') userId: string,
+    @Param('columnId') columnId: string,
+    @Param('cardId') cardId: string,
+  ) {
+    return this.cardsService.deleteCard(
+      Number(cardId),
+      Number(columnId),
+      Number(userId),
+    );
   }
 }
- 

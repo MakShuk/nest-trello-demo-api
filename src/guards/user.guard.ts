@@ -18,7 +18,6 @@ export class UserAuthGuard implements CanActivate {
     }
 
     const userIdParam = this.extractUserIdFromPath(request.path);
-    console.log(`userIdParam: ${userIdParam}, user.id: ${user.id}`);
 
     if (userIdParam && userIdParam !== user.id.toString()) {
       throw new UnauthorizedException('User ID mismatch');

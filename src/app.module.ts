@@ -8,9 +8,19 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { ColumnsModule } from './columns/columns.module';
 import { CardsModule } from './cards/cards.module';
+import { CommentsModule } from './comments/comments.module';
+
+
 
 @Module({
-  imports: [ConfigModule.forRoot(), AuthModule, ColumnsModule, UsersModule, CardsModule],
+  imports: [
+    ConfigModule.forRoot(),
+    AuthModule,
+    ColumnsModule,
+    UsersModule,
+    CardsModule,
+    CommentsModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
