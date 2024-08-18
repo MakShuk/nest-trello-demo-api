@@ -1,6 +1,6 @@
 ## Описание
 
-Этот проект построен на основе фреймворка [NestJS](https://nestjs.com/). Для управления и взаимодействия с базой данных используется [PrismaJS](https://www.prisma.io/). База данных PostgreSQL развертывается в контейнере с использованием [Docker Compose](https://docs.docker.com/compose/).
+Этот проект построен на основе фреймворка [NestJS](https://nestjs.com/). Для управления и взаимодействия с базой данных используется [PrismaJS](https://www.prisma.io/). База данных PostgreSQL развертывается в контейнере с использованием [Docker Compose](https://docs.docker.com/compose/). Дополнительно, схема базы данных визуализирована с помощью dbdiagram.io (<https://dbdiagram.io/d/66bddb6c8b4bb5230e32bcab>).
 
 ## Требования
 
@@ -15,46 +15,46 @@
 
 1. Клонируйте репозиторий:
 
-    ```sh
-    git clone https://github.com/MakShuk/nest-trello-demo-api
-    
-    ```
+   ```sh
+   git clone https://github.com/MakShuk/nest-trello-demo-api
+
+   ```
 
 2. Установите зависимости:
 
-    ```sh
-    yarn install
-    # или
-    npm install
-    ```
+   ```sh
+   yarn install
+   # или
+   npm install
+   ```
 
 ## Запуск базы данных
 
 1. Запустите PostgreSQL с помощью Docker Compose:
 
-    ```sh
-    docker-compose up -d
-    ```
+   ```sh
+   docker-compose up -d
+   ```
 
 2. Проверьте, что контейнер работает:
 
-    ```sh
-    docker-compose ps
-    ```
+   ```sh
+   docker-compose ps
+   ```
 
 ## Настройка Prisma
 
 1. Генерируйте Prisma Client:
 
-    ```sh
-    npx prisma generate
-    ```
+   ```sh
+   npx prisma generate
+   ```
 
 2. Выполните миграции, чтобы создать необходимые таблицы в базе данных:
 
-    ```sh
-    npx prisma migrate dev --name init
-    ```
+   ```sh
+   npx prisma migrate dev --name init
+   ```
 
 ## Запуск проекта
 
