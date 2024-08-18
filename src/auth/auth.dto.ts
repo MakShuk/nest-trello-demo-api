@@ -5,11 +5,21 @@ import {
   MaxLength,
   Matches,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class RegisterDto {
-  @IsEmail()
+  @ApiProperty({
+    example: 'user@example.com',
+    description: 'The email of the user',
+  })
+  @IsEmail({}, { message: 'Email must be a valid email address' })
   email: string;
 
+  @ApiProperty({
+    example: 'Password123!',
+    description:
+      'The password of the user (8-20 characters including upperCase, lowerCase, number and special character)',
+  })
   @IsString()
   @MinLength(8, { message: 'Password must be at least 8 characters long' })
   @MaxLength(20, { message: 'Password must be at most 20 characters long' })
@@ -27,6 +37,10 @@ export class RegisterDto {
   })
   password: string;
 
+  @ApiProperty({
+    example: 'username',
+    description: 'The username of the user (3-20 characters)',
+  })
   @IsString()
   @MinLength(3, { message: 'Username must be at least 3 characters long' })
   @MaxLength(20, { message: 'Username must be at most 20 characters long' })
@@ -34,9 +48,17 @@ export class RegisterDto {
 }
 
 export class LoginDto {
-  @IsEmail()
+  @ApiProperty({
+    example: 'user@example.com',
+    description: 'The email of the user',
+  })
+  @IsEmail({}, { message: 'Email must be a valid email address' })
   email: string;
 
+  @ApiProperty({
+    example: 'Password123!',
+    description: 'The password of the user (8-20 characters)',
+  })
   @IsString()
   @MinLength(8, { message: 'Password must be at least 8 characters long' })
   @MaxLength(20, { message: 'Password must be at most 20 characters long' })

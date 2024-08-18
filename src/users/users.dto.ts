@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsString,
@@ -15,10 +16,22 @@ function IsDefinedIfOtherIsUndefined(property: string) {
 }
 
 export class UpdateUserDto {
+  @ApiProperty({
+    description: 'The email of the user',
+    required: false,
+    example: 'user@example.com',
+  })
   @IsDefinedIfOtherIsUndefined('username')
   @IsEmail()
   email?: string;
 
+  @ApiProperty({
+    description: 'The username of the user',
+    required: false,
+    example: 'john_doe',
+    minLength: 3,
+    maxLength: 20,
+  })
   @IsDefinedIfOtherIsUndefined('email')
   @IsString()
   @MinLength(3, { message: 'Username must be at least 3 characters long' })

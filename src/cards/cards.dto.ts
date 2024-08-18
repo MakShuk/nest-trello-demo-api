@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
@@ -15,11 +16,21 @@ function IsDefinedIfOtherIsUndefined(property: string) {
 }
 
 export class CreateCardDto {
+  @ApiProperty({
+    example: 'My Card',
+    description: 'Name of the card',
+    maxLength: 50,
+  })
   @IsString()
   @IsNotEmpty()
   @MaxLength(50)
   title: string;
 
+  @ApiPropertyOptional({
+    example: 'This is a description',
+    description: 'Description of the card',
+    maxLength: 500,
+  })
   @IsString()
   @IsOptional()
   @MaxLength(500)
@@ -27,11 +38,21 @@ export class CreateCardDto {
 }
 
 export class UpdateCardDto {
+  @ApiPropertyOptional({
+    example: 'My Card',
+    description: 'Name of the card',
+    maxLength: 50,
+  })
   @IsDefinedIfOtherIsUndefined('description')
   @IsString()
   @MaxLength(50)
   title?: string;
 
+  @ApiPropertyOptional({
+    example: 'This is a description',
+    description: 'Description of the card',
+    maxLength: 500,
+  })
   @IsDefinedIfOtherIsUndefined('title')
   @IsString()
   @MaxLength(500)
