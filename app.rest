@@ -58,12 +58,12 @@ content-type: application/json
 }
 
 ### Update column
-PATCH {{baseUrl}}/users/{{userId}}/columns/2
+PATCH {{baseUrl}}/users/{{userId}}/columns/12
 authorization: {{authToken}}
 content-type: application/json
 
 {
-    "title": "Update-columns"
+    "title": "Update-columns2"
 }
 
 ### Delete Column
@@ -80,7 +80,7 @@ authorization:  {{authToken}}
 content-type: application/json
 
 {
-    "title": "title2",
+    "title": "title342",
     "description": "title2-title2"
 }
 
@@ -111,7 +111,7 @@ authorization:  {{authToken}}
 content-type: application/json
 
 {
-    "content": "comment-2"
+    "content": "comm43ent-2"
 
 }
 

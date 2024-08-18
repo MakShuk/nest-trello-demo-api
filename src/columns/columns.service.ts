@@ -1,17 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 
 @Injectable()
 export class ColumnsService {
   constructor(private prisma: PrismaService) {}
 
-  getColumn(userId: number, columnId: number) {
-    return this.prisma.column.findUnique({
+  async getColumn(userId: number, columnId: number) {
+    const column = await this.prisma.column.findUnique({
       where: {
         id: columnId,
         userId: userId,
       },
     });
+
+    if (!column) {
+      throw new NotFoundException('Column not found');
+    }
+    return column;
   }
 
   getAllColumns(userId: number) {
@@ -31,22 +36,43 @@ export class ColumnsService {
     });
   }
 
-  updateColumn(columnId: number, userId: number, data: { title: string }) {
-    return this.prisma.column.update({
+  async updateColumn(
+    columnId: number,
+    userId: number,
+    data: { title: string },
+  ) {
+    const column = await this.prisma.column.findUnique({
       where: {
         id: columnId,
         userId: userId,
       },
+    });
+
+    if (!column) {
+      throw new NotFoundException('Column not found');
+    }
+
+    const updatedColumn = await this.prisma.column.update({
+      where: { id: columnId },
       data,
     });
+
+    return { title: updatedColumn.title };
   }
 
-  deleteColumn(columnId: number, userId: number) {
-    return this.prisma.column.delete({
+  async deleteColumn(columnId: number, userId: number) {
+    const column = await this.prisma.column.findUnique({
       where: {
         id: columnId,
         userId: userId,
       },
     });
+    if (!column) {
+      throw new NotFoundException('Column not found');
+    }
+    await this.prisma.column.delete({
+      where: { id: columnId },
+    });
+    return { message: 'Column deleted successfully' };
   }
 }
