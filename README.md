@@ -1,6 +1,6 @@
 ## Описание
 
-Этот проект построен на основе фреймворка [NestJS](https://nestjs.com/). Для управления и взаимодействия с базой данных используется [PrismaJS](https://www.prisma.io/). База данных PostgreSQL развертывается в контейнере с использованием [Docker Compose](https://docs.docker.com/compose/). Дополнительно, схема базы данных визуализирована с помощью dbdiagram.io (<https://dbdiagram.io/d/66bddb6c8b4bb5230e32bcab>).
+Этот проект построен на основе фреймворка [NestJS](https://nestjs.com/). Для управления и взаимодействия с базой данных используется [PrismaJS](https://www.prisma.io/). База данных PostgreSQL развертывается в контейнере с использованием [Docker Compose](https://docs.docker.com/compose/). Дополнительно, схема базы данных визуализирована с помощью [dbdiagram.io](https://dbdiagram.io/d/66bddb6c8b4bb5230e32bcab).
 
 ## Требования
 
