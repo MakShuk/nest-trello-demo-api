@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  HttpCode,
   Post,
   UsePipes,
   ValidationPipe,
@@ -25,6 +26,7 @@ export class AuthController {
     return this.authService.register(dto);
   }
 
+  @HttpCode(200)
   @Public()
   @Post('login')
   @ApiOperation({ summary: 'Login a user' })

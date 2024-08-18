@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { RegisterDto } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/services/prisma/prisma.service';
@@ -16,7 +16,7 @@ export class AuthService {
     });
 
     if (oldUser) {
-      throw new Error('User already exists');
+      throw new BadRequestException('User already exists');
     }
 
     const passwordHash = await this.getPasswordHash(password);
@@ -42,12 +42,12 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new Error(`Password or login is incorrect`);
+      throw new BadRequestException(`Password or login is incorrect`);
     }
 
     const isCorrectPassword = await compare(password, user.passwordHash);
     if (!isCorrectPassword) {
-      throw new Error(`Password or login is incorrect`);
+      throw new BadRequestException(`Password or login is incorrect`);
     }
     return { id: user.id, email: user.email, username: user.username };
   }

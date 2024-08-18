@@ -4,6 +4,7 @@
 @authToken2= Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYiLCJpYXQiOjE3MjM5MTI3NzB9.WGLcOyKpKrM7Q5KsK6zySNsU-wfF2bBC9CZ1z7iPHrk
 @userId2 = 6
 @baseUrl = http://localhost:3000
+
 ###register
 POST {{baseUrl}}/auth/register
 content-type: application/json
@@ -22,12 +23,15 @@ content-type: application/json
     "email": "exу324@5334s.com",
     "password": "3243223dfAfd_Svd!"
 }
-###
+
+### Get User
 GET {{baseUrl}}/users/{{userId}}
 authorization:  {{authToken}}
-###
+
+###Delete User
 DELETE {{baseUrl}}/users/
-### Update user
+
+### Update User
 PATCH {{baseUrl}}/users/{{userId}}
 authorization:  {{authToken}}
 content-type: application/json
@@ -52,6 +56,7 @@ content-type: application/json
 {
     "title": "new-columns4"
 }
+
 ### Update column
 PATCH {{baseUrl}}/users/{{userId}}/columns/2
 authorization: {{authToken}}
@@ -64,7 +69,6 @@ content-type: application/json
 ### Delete Column
 DELETE {{baseUrl}}/users/{{userId}}/columns/4
 authorization: {{authToken}}
-
 
 ### Get Cards
 GET {{baseUrl}}/users/{{userId}}/columns/2/cards/
