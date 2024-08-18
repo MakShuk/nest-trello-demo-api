@@ -14,13 +14,13 @@ import { Public } from 'src/decorators/custom.decorator';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  //@Public()
+  @Public()
   @Post('register')
   async register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
   }
 
-  //@Public()
+  @Public()
   @Post('login')
   async login(@Body() { email, password }: LoginDto) {
     const { id } = await this.authService.validatePassword(password, email);

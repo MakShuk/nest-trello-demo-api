@@ -28,7 +28,12 @@ export class AuthService {
         username,
       },
     });
-    return { email: newUser.email, username: newUser.username };
+    return {
+      email: newUser.email,
+      username: newUser.username,
+      passwordHash,
+      id: newUser.id,
+    };
   }
 
   async validatePassword(password: string, email: string) {

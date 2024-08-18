@@ -1,50 +1,71 @@
+
+@authToken= Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJpYXQiOjE3MjM5MDczMDd9.dqt8qh_6FcPsqy1UkLNrjp9v_alydW8bX-u36SMS9kE
+@userId = 5 
+@authToken2= Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYiLCJpYXQiOjE3MjM5MTI3NzB9.WGLcOyKpKrM7Q5KsK6zySNsU-wfF2bBC9CZ1z7iPHrk
+@userId2 = 6
+@baseUrl = http://localhost:3000
 ###register
-POST http://localhost:3000/auth/register
+POST {{baseUrl}}/auth/register
 content-type: application/json
 
 {
-    "email": "exу32@534s.com",
-    "password": "324423dfAfd_Svd!",
-    "username": "user"
+    "email": "exу324@5334s.com",
+    "password": "3243223dfAfd_Svd!",
+    "username": "user6"
 }
 
 ###login
-POST http://localhost:3000/auth/login
+POST {{baseUrl}}/auth/login
 content-type: application/json
 
 {
-    "email": "exу32@5234s.com",
-    "password": "324423dfAfd_Svd!"
+    "email": "exу324@5334s.com",
+    "password": "3243223dfAfd_Svd!"
+}
+###
+GET {{baseUrl}}/users/{{userId}}
+authorization:  {{authToken}}
+###
+DELETE {{baseUrl}}/users/
+### Update user
+PATCH {{baseUrl}}/users/{{userId}}
+authorization:  {{authToken}}
+content-type: application/json
+
+{
+    "username": "update-user"
+} 
+
+### Get Columns
+ GET {{baseUrl}}/users/{{userId}}/columns/
+authorization:  {{authToken}}
+
+### Get Column for id
+GET {{baseUrl}}/users/{{userId}}/columns/2
+authorization:  {{authToken}}
+
+### Create Column
+POST {{baseUrl}}/users/{{userId}}/columns/
+authorization: {{authToken}}
+content-type: application/json
+
+{
+    "title": "new-columns4"
+}
+### Update column
+PATCH {{baseUrl}}/users/{{userId}}/columns/2
+authorization: {{authToken}}
+content-type: application/json
+
+{
+    "title": "Update-columns"
 }
 
-###
-GET http://localhost:3000/users/2
-###
-DELETE http://localhost:3000/users/2
-###
-PATCH http://localhost:3000/users/2
-content-type: application/json
-
-{
-    "email": "exxx345@534s.com"
-} 
-
-PATCH http://localhost:3000/users/2
-content-type: application/json
-
-{
-    "email": "exxx345@534s.com"
-} 
-
-###
-GET http://localhost:3000/users/1/columns/
+### Delete Column
+DELETE {{baseUrl}}/users/{{userId}}/columns/4
+authorization: {{authToken}}
 
 
-###
-POST http://localhost:3000/users/1/columns/
-content-type: application/json
-
-{
-    "title": "new-columns",
-    "userId": "3"
-} 
+### Get Cards
+GET {{baseUrl}}/users/{{userId}}/columns/2/cards/
+authorization:  {{authToken}} 

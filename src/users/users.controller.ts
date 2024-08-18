@@ -1,23 +1,39 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  UsePipes,
+  ValidationPipe,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Prisma } from '@prisma/client';
+import { UpdateUserDto } from './users.dto';
+import { UserAuthGuard } from 'src/guards/user.guard';
 
+@UsePipes(new ValidationPipe({ whitelist: true }))
 @Controller('users')
+@UseGuards(UserAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get(':id')
-  async findOneForName(@Param('id') id: number) {
-    return this.usersService.findOne(Number(id));
+  @Get(':userId')
+  async findUser(@Param('userId') userId: number, @Req() req: Request) {
+    return this.usersService.findOne(Number(userId));
   }
 
-  @Patch(':id')
-  async update(@Param('id') id: number, @Body() data: Prisma.UserUpdateInput) {
-    return this.usersService.update(Number(id), data);
+  @Patch(':userId')
+  async updateUser(@Body() data: UpdateUserDto, @Req() req: Request) {
+    const reqUserId = Number(req['user'].id);
+    return this.usersService.updateUser(reqUserId, data);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: number) {
-    return this.usersService.delete(Number(id));
+  @Delete(':userId')
+  async deleteUser(@Req() req: Request) {
+     const reqUserId = Number(req['user'].id);
+    return this.usersService.delete(reqUserId);
   }
 }
