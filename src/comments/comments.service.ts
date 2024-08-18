@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { CreateCommentDto } from './comment.dto';
 
@@ -49,6 +53,14 @@ export class CommentsService {
       throw new ForbiddenException('Column does not belong to the user');
     }
 
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+
+    if (!comment) {
+      throw new NotFoundException('Comment does not exist');
+    }
+
     return this.prisma.comment.update({
       where: { id: commentId },
       data,
@@ -64,9 +76,14 @@ export class CommentsService {
       throw new ForbiddenException('Column does not belong to the user');
     }
 
-    return this.prisma.comment.findUnique({
+    const comment = await this.prisma.comment.findUnique({
       where: { id: commentId },
     });
+
+    if (!comment) {
+      throw new NotFoundException('Comment does not exist');
+    }
+    return comment;
   }
 
   async deleteComment(userId: number, columnId: number, commentId: number) {
@@ -76,6 +93,14 @@ export class CommentsService {
 
     if (!column || column.userId !== userId) {
       throw new ForbiddenException('Column does not belong to the user');
+    }
+
+    const comment = await this.prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+
+    if (!comment) {
+      throw new NotFoundException('Comment does not exist');
     }
 
     return this.prisma.comment.delete({
