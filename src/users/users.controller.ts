@@ -13,9 +13,13 @@ import {
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './users.dto';
 import { UserAuthGuard } from 'src/guards/user.guard';
-import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-
-
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('users')
 @ApiBearerAuth()
@@ -30,7 +34,7 @@ export class UsersController {
   @ApiParam({ name: 'userId', type: 'number', description: 'User ID' })
   @ApiResponse({ status: 200, description: 'Returns the user.' })
   @ApiResponse({ status: 404, description: 'User not found.' })
-  async findUser(@Param('userId') userId: number, @Req() req: Request) {
+  async findUser(@Param('userId') userId: number) {
     return this.usersService.findOne(Number(userId));
   }
 

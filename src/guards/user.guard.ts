@@ -4,15 +4,14 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class UserAuthGuard implements CanActivate {
-  constructor(private reflector: Reflector) {}
+  constructor() {}
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
-    const user = request.user; 
+    const user = request.user;
     if (!user) {
       throw new UnauthorizedException('User not authenticated');
     }
