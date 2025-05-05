@@ -1,79 +1,124 @@
-## Описание
+<p align="right">
+  <a href="README.ru.md"><img src="https://img.shields.io/badge/Русский-red?style=for-the-badge&logo=github" alt="Русский"></a>
+</p>
 
-Этот проект построен на основе фреймворка [NestJS](https://nestjs.com/). Для управления и взаимодействия с базой данных используется [PrismaJS](https://www.prisma.io/). База данных PostgreSQL развертывается в контейнере с использованием [Docker Compose](https://docs.docker.com/compose/). Дополнительно, схема базы данных визуализирована с помощью [dbdiagram.io](https://dbdiagram.io/d/66bddb6c8b4bb5230e32bcab).
+# Nest Trello Demo API
 
-## Требования
+A backend API for a Trello-like task management application, built with NestJS and Prisma.  
 
-Перед запуском проекта убедитесь, что у вас установлены следующие инструменты:
 
-- [Node.js](https://nodejs.org/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Yarn](https://yarnpkg.com/) или [NPM](https://www.npmjs.com/)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Node](https://img.shields.io/badge/node-%3E=18.0.0-blue)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
 
-## Установка
+## Table of Contents
 
-1. Клонируйте репозиторий:
+- [About](#about)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [FAQ](#faq)
+- [Roadmap](#roadmap)
+- [Acknowledgements](#acknowledgements)
+- [Changelog](#changelog)
 
-   ```sh
-   git clone https://github.com/MakShuk/nest-trello-demo-api
+## About
 
-   ```
+Nest Trello Demo API is a backend service that provides RESTful endpoints for managing boards, columns, cards, users, and comments, similar to Trello.  
+It is designed for learning, prototyping, or as a foundation for a full-featured task management system.
 
-2. Установите зависимости:
+**Features:**
+- User authentication (JWT)
+- CRUD for boards, columns, cards, comments
+- Modular architecture (NestJS)
+- Database migrations with Prisma
+- Docker support for easy deployment
 
-   ```sh
-   yarn install
-   # или
-   npm install
-   ```
+## Requirements
 
-## Запуск базы данных
+- Node.js >= 18.0.0
+- npm >= 9.0.0
+- Docker & Docker Compose (optional, for containerized setup)
+- PostgreSQL (if running without Docker)
 
-1. Запустите PostgreSQL с помощью Docker Compose:
+## Installation
 
-   ```sh
-   docker-compose up -d
-   ```
-
-2. Проверьте, что контейнер работает:
-
-   ```sh
-   docker-compose ps
-   ```
-
-## Настройка Prisma
-
-1. Генерируйте Prisma Client:
-
-   ```sh
-   npx prisma generate
-   ```
-
-2. Выполните миграции, чтобы создать необходимые таблицы в базе данных:
-
-   ```sh
-   npx prisma migrate dev --name init
-   ```
-
-## Запуск проекта
-
-Запустите сервер разработки:
-
-```sh
-yarn start:dev
-# или
-npm run start:dev
+```bash
+git clone https://github.com/your-username/nest-trello-demo-api.git
+cd nest-trello-demo-api
+npm install
 ```
 
-## Структура проекта
+If you want to run with Docker:
 
-Описание структуры проекта:
+```bash
+docker-compose up --build
+```
 
-- `src/` - исходные файлы приложения
-- `prisma/` - схемы и миграции базы данных
-- `docker-compose.yml` - файл конфигурации Docker Compose
+Or, to run locally (requires PostgreSQL running):
 
-## Лицензия
+1. Configure your database in `.env`
+2. Run migrations:
+   ```bash
+   npx prisma migrate deploy
+   ```
+3. Start the server:
+   ```bash
+   npm run start:dev
+   ```
 
-Этот проект лицензируется на условиях лицензии MIT.
+## Usage
+
+After starting the server, the API will be available at `http://localhost:3000`.
+
+Example: Create a new card (using [app.rest](app.rest) or any REST client):
+
+```http
+POST /cards
+Content-Type: application/json
+
+{
+  "title": "New Task",
+  "description": "Description here",
+  "columnId": 1
+}
+```
+
+For authentication, obtain a JWT token via `/auth/login` and include it in the `Authorization` header.
+
+## License
+
+This project is licensed under the [MIT](LICENSE) license.
+
+---
+
+## FAQ
+
+**Q:** How do I run migrations?  
+**A:** Use `npx prisma migrate deploy` or `npx prisma migrate dev`.
+
+**Q:** How do I change the database?  
+**A:** Edit the `DATABASE_URL` in your `.env` file.
+
+## Roadmap
+
+- Add board sharing and permissions
+- WebSocket support for real-time updates
+- Integration tests
+
+## Acknowledgements
+
+- [NestJS](https://nestjs.com/)
+- [Prisma](https://www.prisma.io/)
+- [shields.io](https://shields.io)
+- [PurpleBooth README Template](https://github.com/PurpleBooth/a-good-readme-template)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
+
+---
+
+**Keep this README up to date. For translations, use separate files (e.g., `README.ru.md`).**
